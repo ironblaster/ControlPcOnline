@@ -1,4 +1,4 @@
-package it.ironblaster.vaadin8skeleton;
+package it.ironblaster.vaadin8skeleton.constructanddestroy;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
