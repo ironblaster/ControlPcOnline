@@ -1,69 +1,84 @@
 package net.ironblaster.ControlPcOnline.persistence.pojo;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
 import org.junit.jupiter.api.Test;
-import org.mapdb.BTreeMap;
 import org.mapdb.DB;
-import org.mapdb.DBMaker;
-import org.mapdb.Serializer;
 
 public class Config {
 	
 	
-	
-	
-	Map<String,String> computer = new HashMap<String, String>();
 	 public static DB db;
 	 public static ConcurrentMap<String,String> emailMap;
+	 public static ConcurrentMap<String,String> listIp;
 	 
-	 
-	 
-	 
-	 
-	String email=emailMap.get("mail");
+	 private static String emailsave=emailMap.get("mail");
 	
-	public String getEmail(){
-		return this.email;
+
+	
+	public static String getEmail(){
+		return emailsave;
 	}
 
 
 
 
-	public void setEmail(String email) {
+	public static void setEmail(String email) {
 		
 		emailMap.put("mail",email);
 		db.commit();
-		this.email=email;
+		emailsave=email;
 	
 	}
 
 
 
-	public Map<String, String> getComputer() {
-		return computer;
+	public static ConcurrentMap<String, String> getListPc() {
+		return listIp;
 	}
 
 
-	public void setComputer(Map<String, String> computer) {
-		this.computer = computer;
+	public static void removeToListIPbyName(String pcName) {
+		String removeip="";
+		for (String ip : listIp.keySet()) 
+			if(listIp.get(ip).equals(pcName))
+				removeip=ip;
+		
+		listIp.remove(removeip);
+		db.commit();
+	}
+	
+	
+	
+	public static void removeToListIpbyIp(String ipAddress) {
+		
+		listIp.remove(ipAddress);
+		db.commit();
+	}
+	
+	
+	public static void addInListIP(String ip,String pcName) {
+		
+		listIp.put(pcName, ip);
+		db.commit();
+		
 	}
 
+	
 
-	
-	
-	
-	
-	
-	
 	
 	@Test
 	public void test() {
 		
-		
-		
+
 		
 	}
+	
+	
+	
+	
+	
+	
+	
 }

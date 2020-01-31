@@ -25,7 +25,7 @@ public class ContainerStatus {
 	
 	@PreDestroy
 	private void preDestroy() {
-		PersistDB.CloseSaveDB();
+		PersistDB.closeSaveDB();
 	}
 	
 	
