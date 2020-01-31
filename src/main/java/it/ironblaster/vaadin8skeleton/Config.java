@@ -16,10 +16,13 @@ public class Config {
 	
 	
 	Map<String,String> computer = new HashMap<String, String>();
-	private DB db = DBMaker.fileDB("dataConfig.irondb").make();
-	private ConcurrentMap<String,String> emailMap = db.hashMap("email", Serializer.STRING, Serializer.STRING).createOrOpen();
-	
-	
+	 public static DB db;
+	 public static ConcurrentMap<String,String> emailMap;
+	 
+	 
+	 
+	 
+	 
 	String email=emailMap.get("mail");
 	
 	public String getEmail(){
