@@ -1,6 +1,5 @@
 package net.ironblaster.ControlPcOnline.ejb;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
@@ -18,15 +17,15 @@ import net.ironblaster.ControlPcOnline.persistence.PersistDB;
 public class ContainerStatus {
 
 	
-	@PostConstruct
+	/*@PostConstruct
 	private void postConstruct() {
 		PersistDB.loadDB();
-	}
+	}*/
 	
-	@PreDestroy
+/*	@PreDestroy
 	private void preDestroy() {
 		PersistDB.closeSaveDB();
-	}
+	}*/
 	
 	
 }
