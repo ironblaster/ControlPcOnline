@@ -5,28 +5,25 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
 import org.junit.jupiter.api.Test;
+import org.mapdb.BTreeMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
+import org.mapdb.Serializer;
 
 public class Config {
 	
 	
-	String email;
+	
 	
 	Map<String,String> computer = new HashMap<String, String>();
-
-
+	private DB db = DBMaker.fileDB("dataConfig.irondb").make();
+	private ConcurrentMap<String,String> emailMap = db.hashMap("email", Serializer.STRING, Serializer.STRING).createOrOpen();
 	
-	public String getEmail() throws Exception{
-		if (this.email==null) {
-			DB db = DBMaker.memoryDB().make();
-			
-			ConcurrentMap<?, ?> map = db.hashMap("email").open();
-			
-			this.email=(String) map.get("mail");
-			
-		}
-		return email;
+	
+	String email=emailMap.get("mail");
+	
+	public String getEmail(){
+		return this.email;
 	}
 
 
@@ -34,13 +31,10 @@ public class Config {
 
 	public void setEmail(String email) {
 		
-		DB db = DBMaker.memoryDB().make();
-		
-		ConcurrentMap map = db.hashMap("email").createOrOpen();
-		
-		map.put("mail",email);
-		
-		this.email = email;
+		emailMap.put("mail",email);
+		db.commit();
+		this.email=email;
+	
 	}
 
 
@@ -65,11 +59,8 @@ public class Config {
 	@Test
 	public void test() {
 		
-		DB db = DBMaker.memoryDB().make();
 		
-		ConcurrentMap map = db.hashMap("config").createOrOpen();
 		
-		map.put("something", "here");
 		
 	}
 }
