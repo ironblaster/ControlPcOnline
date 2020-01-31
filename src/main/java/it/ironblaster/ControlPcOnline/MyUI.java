@@ -1,4 +1,4 @@
-package it.ironblaster.vaadin8skeleton;
+package it.ironblaster.ControlPcOnline;
 
 import javax.servlet.annotation.WebServlet;
 

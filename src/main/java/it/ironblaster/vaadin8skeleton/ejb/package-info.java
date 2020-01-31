@@ -1,1 +1,0 @@
-package it.ironblaster.vaadin8skeleton.ejb;

@@ -1,9 +1,11 @@
-package it.ironblaster.vaadin8skeleton.persistence;
+package it.ironblaster.ControlPcOnline.persistence;
 
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
 
-import it.ironblaster.vaadin8skeleton.Config;
+import it.ironblaster.ControlPcOnline.Config;
+
+
 
 public class PersistDB {
 	
