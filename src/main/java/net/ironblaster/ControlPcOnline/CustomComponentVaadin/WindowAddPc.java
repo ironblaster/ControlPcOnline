@@ -56,10 +56,7 @@ public class WindowAddPc extends Window{
 			
 			try {
 				
-				Config.addInListIP(ip.getValue().trim(), nome.getValue().trim());
-			//TODO AGGIUNGERE SALVATAGGIO DEL NUOVO PC
-			
-			
+				Config.addInListIP(ip.getValue().trim(), nome.getValue().trim());			
 			this.close();
 			}
 			catch (Exception ex) {

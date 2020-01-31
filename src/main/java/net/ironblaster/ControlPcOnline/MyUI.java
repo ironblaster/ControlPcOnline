@@ -1,5 +1,8 @@
 package net.ironblaster.ControlPcOnline;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
@@ -13,7 +16,9 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
-
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -50,6 +55,53 @@ public class MyUI extends UI {
         	
         });
         
+        
+        
+        Button eseguiPing = new Button("Ping");
+        eseguiPing.addClickListener(e->{
+        	
+        	if(computer.getSelectedItems().isEmpty()) {
+        		Notification.show("selezionare un Ip da pingare");
+        		return;}
+
+	          
+	         if(Config.isReachable(computer.getSelectedItems().iterator().next().getIp())) {
+	        	 Notification.show("ip raggiungibile",Type.HUMANIZED_MESSAGE).setDelayMsec(4000);
+	         }else {
+	        	 Notification.show("ip NON raggiungibile",Type.ERROR_MESSAGE);
+	         }
+
+
+        	
+        	
+        	
+        });
+        
+        
+        
+        Button rimuovi = new Button("rimuovi");
+        rimuovi.addClickListener(e->{
+        	if(computer.getSelectedItems().isEmpty()) {
+        		Notification.show("selezionare un Ip da rimuovere");
+        		return;}
+        	
+        	
+        	Config.removeToListIpbyIp(computer.getSelectedItems().iterator().next().getIp());
+        	computer.setItems(Config.getListPc());
+        	
+        });
+        
+        
+        
+        
+        HorizontalLayout bottoni = new HorizontalLayout();
+        bottoni.addComponents(aggiungiPc,rimuovi,eseguiPing);
+        
+        
+        
+        
+        
+        
         GridContextMenu<PcList> gridMenu = new GridContextMenu<>(computer);
         gridMenu.addGridBodyContextMenuListener(this::updateGridBodyMenu);
         computer.addColumn(PcList::getIp).setCaption("Ip");
@@ -71,11 +123,11 @@ public class MyUI extends UI {
         
         
         
+       
         
         
         
-        
-        layout.addComponents(aggiungiPc,computer);
+        layout.addComponents(bottoni,computer);
         layout.setComponentAlignment(computer, Alignment.MIDDLE_CENTER);
         
         setContent(layout);
@@ -88,19 +140,28 @@ public class MyUI extends UI {
     
     
     private void updateGridBodyMenu(GridContextMenuOpenEvent<PcList> event) {
-        event.getContextMenu().removeItems();
+        //event.getContextMenu().removeItems();
         if (event.getItem() != null) {
-            event.getContextMenu().addItem("Remove row", VaadinIcons.CLOSE, selectedItem -> {
+            event.getContextMenu().addItem("Rimuovi", VaadinIcons.CLOSE, selectedItem -> {
             	//TODO AGGIUNGERE PULSANTI SIA DI TEST PING CHE DI RIMOZIONE DA PERSISTENZA
-            	
+            	Config.removeToListIpbyIp(event.getItem().getIp());
+            	computer.setItems(Config.getListPc());
               /*  userData.remove(event.getItem());
                 grid.setItems(userData);*/
             });
         } else {
-            event.getContextMenu().addItem("Add row", VaadinIcons.PLUS, selectedItem -> {
-             /*   userData.add(new UserData("John", "Doe", "john.doe[at]lost.com"));
-                grid.setItems(userData);*/
-            });
+        	
+        	 event.getContextMenu().addItem("Rimuovi2", VaadinIcons.CLOSE, selectedItem -> {
+             	//TODO AGGIUNGERE PULSANTI SIA DI TEST PING CHE DI RIMOZIONE DA PERSISTENZA
+             	Config.removeToListIpbyIp(event.getItem().getIp());
+             	computer.setItems(Config.getListPc());
+               /*  userData.remove(event.getItem());
+                 grid.setItems(userData);*/
+             });
+          /*  event.getContextMenu().addItem("Add row", VaadinIcons.PLUS, selectedItem -> {
+               userData.add(new UserData("John", "Doe", "john.doe[at]lost.com"));
+                grid.setItems(userData);
+            });*/
         }
     }
     

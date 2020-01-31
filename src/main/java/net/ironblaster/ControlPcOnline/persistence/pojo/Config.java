@@ -1,5 +1,8 @@
 package net.ironblaster.ControlPcOnline.persistence.pojo;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -89,7 +92,7 @@ public class Config {
 	
 	public static void addInListIP(String ip,String pcName) {
 		
-		listIp.put(pcName, ip);
+		listIp.put(ip, pcName);
 		db.commit();
 		
 	}
@@ -104,6 +107,21 @@ public class Config {
 		
 	}
 	
+	
+	public static Boolean isReachable(String ip) {
+		
+		try{
+			
+			return InetAddress.getByName(ip).isReachable(10000);}
+		catch (Exception e) {
+			return false;
+		}
+		
+		
+		}
+		
+		
+		
 	
 	
 	
