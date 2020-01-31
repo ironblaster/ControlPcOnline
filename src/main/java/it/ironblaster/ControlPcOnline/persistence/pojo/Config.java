@@ -1,4 +1,4 @@
-package it.ironblaster.ControlPcOnline;
+package it.ironblaster.ControlPcOnline.persistence.pojo;
 
 import java.util.HashMap;
 import java.util.Map;
