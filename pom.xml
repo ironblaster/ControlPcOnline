@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>it.ironblaster</groupId>
-	<artifactId>vaadin8skeleton</artifactId>
+	<artifactId>ControlPcOnline</artifactId>
 	<packaging>war</packaging>
 	<version>1.0</version>
-	<name>vaadin8skeleton</name>
+	<name>ControlPcOnline</name>
 
 	<prerequisites>
 		<maven>3</maven>
