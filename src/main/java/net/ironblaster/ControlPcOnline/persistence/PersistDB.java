@@ -1,9 +1,11 @@
-package it.ironblaster.ControlPcOnline.persistence;
+package net.ironblaster.ControlPcOnline.persistence;
 
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
 
-import it.ironblaster.ControlPcOnline.persistence.pojo.Config;
+import net.ironblaster.ControlPcOnline.persistence.pojo.Config;
+
+
 
 
 

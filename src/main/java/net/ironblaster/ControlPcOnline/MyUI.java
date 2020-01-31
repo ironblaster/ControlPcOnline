@@ -1,4 +1,4 @@
-package it.ironblaster.ControlPcOnline;
+package net.ironblaster.ControlPcOnline;
 
 import javax.servlet.annotation.WebServlet;
 

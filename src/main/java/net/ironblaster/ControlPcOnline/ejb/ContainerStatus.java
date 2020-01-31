@@ -1,4 +1,4 @@
-package it.ironblaster.ControlPcOnline.ejb;
+package net.ironblaster.ControlPcOnline.ejb;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -6,7 +6,9 @@ import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
-import it.ironblaster.ControlPcOnline.persistence.PersistDB;
+import net.ironblaster.ControlPcOnline.persistence.PersistDB;
+
+
 
 
 
