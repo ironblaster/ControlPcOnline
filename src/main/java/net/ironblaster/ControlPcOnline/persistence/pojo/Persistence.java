@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentMap;
 
-
+import org.junit.Test;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
@@ -15,14 +15,21 @@ import net.ironblaster.ControlPcOnline.sessionPojo.PcList;
 @SuppressWarnings("unchecked")
 public class Persistence {
 	
-	public static DB db;
+	 public static DB db;
 	 public static ConcurrentMap<String,String> emailMap;
 	 public static ConcurrentMap<String,String> listIp;
 	 public static ConcurrentMap<Integer,TaskSchedule> scheduletime;
 	 
 	 
 	static {
-		db=DBMaker.fileDB("dataConfig.irondb").make();
+		try {
+		db=DBMaker.fileDB("dataConfig4.irondb").make();
+		
+		}
+		catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 		emailMap = db.hashMap("email", Serializer.STRING, Serializer.STRING).createOrOpen();
 		listIp = db.hashMap("iplist", Serializer.STRING, Serializer.STRING).createOrOpen();
 		scheduletime = (ConcurrentMap<Integer, TaskSchedule>) db.hashMap("schedule").createOrOpen();
@@ -125,12 +132,7 @@ public class Persistence {
 	
 
 	
-	
-	public void test() {
-		
 
-		
-	}
 	
 	
 
