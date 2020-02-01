@@ -1,23 +1,24 @@
 package net.ironblaster.ControlPcOnline.persistence.pojo;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
-import org.mapdb.DataInput2;
-import org.mapdb.DataOutput2;
-import org.mapdb.Serializer;
-
-public class TaskSchedule implements Serializer<TaskSchedule>{
+public class TaskSchedule implements Serializable{
 
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	enum periodicita{
-		DAILY(TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)),
-		TWODAYS(TimeUnit.MILLISECONDS.convert(2, TimeUnit.DAYS)),
-		SEVENODAYS(TimeUnit.MILLISECONDS.convert(7, TimeUnit.DAYS)),
-		THIRTHYDAYS(TimeUnit.MILLISECONDS.convert(30, TimeUnit.DAYS));;
+		DAILY(TimeUnit.DAYS.toMillis(1)),
+		TWODAYS(TimeUnit.DAYS.toMillis(2)),
+		SEVENODAYS(TimeUnit.DAYS.toMillis(7)),
+		THIRTHYDAYS(TimeUnit.DAYS.toMillis(30));
 		
 		public final long value;
 		periodicita(long value) {this.value=value;}
@@ -84,18 +85,6 @@ public class TaskSchedule implements Serializer<TaskSchedule>{
 	}
 
 
-	@Override
-	public void serialize(DataOutput2 out, TaskSchedule value) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public TaskSchedule deserialize(DataInput2 input, int available) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 
 }

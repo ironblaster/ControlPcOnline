@@ -23,7 +23,7 @@ public class Persistence {
 	 
 	static {
 		try {
-		db=DBMaker.fileDB("dataConfig4.irondb").make();
+		db=DBMaker.fileDB("testdb4.irondb").make();
 		
 		}
 		catch (Exception e) {
@@ -34,7 +34,11 @@ public class Persistence {
 		listIp = db.hashMap("iplist", Serializer.STRING, Serializer.STRING).createOrOpen();
 		scheduletime = (ConcurrentMap<Integer, TaskSchedule>) db.hashMap("schedule").createOrOpen();
 		if(scheduletime.isEmpty()) {
-			scheduletime.put(1, new TaskSchedule());
+			try {
+			scheduletime.put(1, new TaskSchedule());}
+			catch (Exception e ) {
+				e.printStackTrace();
+			}
 			db.commit();
 			}
 		

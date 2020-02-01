@@ -6,6 +6,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
+import net.ironblaster.ControlPcOnline.persistence.pojo.Persistence;
+
 
 
 
@@ -26,10 +28,10 @@ public class ContainerStatus {
 		}
 	}
 	
-/*	@PreDestroy
+	@PreDestroy
 	private void preDestroy() {
-		PersistDB.closeSaveDB();
-	}*/
+		Persistence.db.close();
+	}
 	
 	
 }
