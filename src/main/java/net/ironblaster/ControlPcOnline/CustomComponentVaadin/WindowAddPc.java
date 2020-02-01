@@ -8,7 +8,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
 
-import net.ironblaster.ControlPcOnline.persistence.pojo.Config;
+import net.ironblaster.ControlPcOnline.persistence.pojo.Persistence;
 
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -56,7 +56,7 @@ public class WindowAddPc extends Window{
 			
 			try {
 				
-				Config.addInListIP(ip.getValue().trim(), nome.getValue().trim());			
+				Persistence.addInListIP(ip.getValue().trim(), nome.getValue().trim());			
 			this.close();
 			}
 			catch (Exception ex) {

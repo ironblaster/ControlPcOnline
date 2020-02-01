@@ -23,7 +23,8 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 import net.ironblaster.ControlPcOnline.CustomComponentVaadin.WindowAddPc;
-import net.ironblaster.ControlPcOnline.persistence.pojo.Config;
+import net.ironblaster.ControlPcOnline.networkCommand.Ping;
+import net.ironblaster.ControlPcOnline.persistence.pojo.Persistence;
 import net.ironblaster.ControlPcOnline.sessionPojo.PcList;
 
 /**
@@ -65,7 +66,7 @@ public class MyUI extends UI {
         		return;}
 
 	          
-	         if(Config.isReachable(computer.getSelectedItems().iterator().next().getIp())) {
+	         if(Ping.isReachable(computer.getSelectedItems().iterator().next().getIp())) {
 	        	 Notification.show("ip raggiungibile",Type.HUMANIZED_MESSAGE).setDelayMsec(4000);
 	         }else {
 	        	 Notification.show("ip NON raggiungibile",Type.ERROR_MESSAGE);
@@ -86,8 +87,8 @@ public class MyUI extends UI {
         		return;}
         	
         	
-        	Config.removeToListIpbyIp(computer.getSelectedItems().iterator().next().getIp());
-        	computer.setItems(Config.getListPc());
+        	Persistence.removeToListIpbyIp(computer.getSelectedItems().iterator().next().getIp());
+        	computer.setItems(Persistence.getListPc());
         	
         });
         
@@ -111,13 +112,13 @@ public class MyUI extends UI {
        
         
         
-        computer.setItems(Config.getListPc());
+        computer.setItems(Persistence.getListPc());
         
         
         
         
         this.addWindowOrderUpdateListener(e->{
-        	computer.setItems(Config.getListPc());
+        	computer.setItems(Persistence.getListPc());
         	
         });      
         
@@ -144,8 +145,8 @@ public class MyUI extends UI {
         if (event.getItem() != null) {
             event.getContextMenu().addItem("Rimuovi", VaadinIcons.CLOSE, selectedItem -> {
             	//TODO AGGIUNGERE PULSANTI SIA DI TEST PING CHE DI RIMOZIONE DA PERSISTENZA
-            	Config.removeToListIpbyIp(event.getItem().getIp());
-            	computer.setItems(Config.getListPc());
+            	Persistence.removeToListIpbyIp(event.getItem().getIp());
+            	computer.setItems(Persistence.getListPc());
               /*  userData.remove(event.getItem());
                 grid.setItems(userData);*/
             });
@@ -153,8 +154,8 @@ public class MyUI extends UI {
         	
         	 event.getContextMenu().addItem("Rimuovi2", VaadinIcons.CLOSE, selectedItem -> {
              	//TODO AGGIUNGERE PULSANTI SIA DI TEST PING CHE DI RIMOZIONE DA PERSISTENZA
-             	Config.removeToListIpbyIp(event.getItem().getIp());
-             	computer.setItems(Config.getListPc());
+             	Persistence.removeToListIpbyIp(event.getItem().getIp());
+             	computer.setItems(Persistence.getListPc());
                /*  userData.remove(event.getItem());
                  grid.setItems(userData);*/
              });

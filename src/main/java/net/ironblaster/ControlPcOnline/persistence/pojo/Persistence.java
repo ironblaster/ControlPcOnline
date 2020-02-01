@@ -1,11 +1,8 @@
 package net.ironblaster.ControlPcOnline.persistence.pojo;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
-import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
 
@@ -15,19 +12,26 @@ import org.mapdb.Serializer;
 
 import net.ironblaster.ControlPcOnline.sessionPojo.PcList;
 
-public class Config {
+@SuppressWarnings("unchecked")
+public class Persistence {
 	
 	public static DB db;
 	 public static ConcurrentMap<String,String> emailMap;
 	 public static ConcurrentMap<String,String> listIp;
-	 
+	 public static ConcurrentMap<Integer,TaskSchedule> scheduletime;
 	 
 	 
 	static {
 		db=DBMaker.fileDB("dataConfig.irondb").make();
 		emailMap = db.hashMap("email", Serializer.STRING, Serializer.STRING).createOrOpen();
 		listIp = db.hashMap("iplist", Serializer.STRING, Serializer.STRING).createOrOpen();
+		scheduletime = (ConcurrentMap<Integer, TaskSchedule>) db.hashMap("schedule").createOrOpen();
+		if(scheduletime.isEmpty()) {
+			scheduletime.put(1, new TaskSchedule());
+			db.commit();
 			}
+		
+		}
 	
 	
 	 
@@ -40,8 +44,29 @@ public class Config {
 		return emailsave;
 	}
 
+	public static TaskSchedule getTask() {
+		
+		return scheduletime.get(1);
+		
+	}
+	
+	public static void setTask(TaskSchedule schedule) {
+		scheduletime.put(1, schedule);
+		db.commit();
+		
+		
+	}
+	public static long getPeriodTask() {
+		
+		return scheduletime.get(1).getPeriodo().getvalue();
+	}
 
-
+	public static Calendar getCalendarTask() {
+		return scheduletime.get(1).getOra();
+		
+	}
+	
+	
 
 	public static void setEmail(String email) {
 		
@@ -108,17 +133,7 @@ public class Config {
 	}
 	
 	
-	public static Boolean isReachable(String ip) {
-		
-		try{
-			
-			return InetAddress.getByName(ip).isReachable(10000);}
-		catch (Exception e) {
-			return false;
-		}
-		
-		
-		}
+
 		
 		
 		

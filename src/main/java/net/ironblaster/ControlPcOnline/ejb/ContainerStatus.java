@@ -5,7 +5,6 @@ import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
-import net.ironblaster.ControlPcOnline.persistence.PersistDB;
 
 
 
