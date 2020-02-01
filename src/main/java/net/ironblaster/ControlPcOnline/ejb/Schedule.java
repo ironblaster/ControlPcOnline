@@ -23,7 +23,7 @@ public class Schedule {
 		
 
 	
-		// every night at 2am you run your task
+		// every night at 23pm you run your task
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(exe(), Persistence.getCalendarTask().getTime(),Persistence.getPeriodTask());
 		
@@ -40,6 +40,22 @@ public class Schedule {
 		public void run() {
 			System.out.println("esecuzione task alle: "+new Date().getSeconds());
 		
+			//TODO CREARE SISTEMA DI INVIO EMAIL CON I RISULTATI DEI PC 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//TODO CREARE UN EMAIL DI UTILIZZO BASICO PER PROGETTI JAVA GENERICI POSSIBILMENTE GOOGLE FARE DEI TEST DI INVIO
+			//VISTO CHE GOOGLE DA PROBLEMI CON LE APP NON CERTIFICATE (ABILITARE SISTEMA COME LA TELECAMERA)
+			
+			
 			
 			
 			}

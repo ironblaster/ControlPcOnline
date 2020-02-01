@@ -23,7 +23,7 @@ public class Persistence {
 	 
 	static {
 		try {
-		db=DBMaker.fileDB("testdb4.irondb").make();
+		db=DBMaker.fileDB("testdbpredest.irondb").make();
 		
 		}
 		catch (Exception e) {
