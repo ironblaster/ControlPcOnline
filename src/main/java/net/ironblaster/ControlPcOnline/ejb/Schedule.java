@@ -33,7 +33,7 @@ public class Schedule {
 	
 	public static void reloadSchedule() {
 		timer.purge();
-		timer.cancel();
+		//timer.cancel();
 		esegui();
 		
 	}
@@ -64,7 +64,7 @@ public class Schedule {
 			
 			
 			
-			
+			Persistence.saveNewScheduleExecution(new Date().getTime());
 			}
 		};
 		

@@ -3,6 +3,8 @@ package net.ironblaster.ControlPcOnline.persistence.pojo;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
 import org.junit.Test;
@@ -10,6 +12,7 @@ import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
 
+import net.ironblaster.ControlPcOnline.ejb.Schedule;
 import net.ironblaster.ControlPcOnline.sessionPojo.PcList;
 
 @SuppressWarnings("unchecked")
@@ -18,7 +21,8 @@ public class Persistence {
 	 public static DB db;
 	 public static ConcurrentMap<String,String> emailMap;
 	 public static ConcurrentMap<String,String> listIp;
-	 public static ConcurrentMap<Integer,TaskSchedule> scheduletime;
+	 public static ConcurrentMap<Integer,TaskSchedule> schedulesettingtime;
+	 public static ConcurrentMap<Integer,Long> scheduleExecution;
 	 
 	 
 	static {
@@ -32,15 +36,17 @@ public class Persistence {
 		}
 		emailMap = db.hashMap("email", Serializer.STRING, Serializer.STRING).createOrOpen();
 		listIp = db.hashMap("iplist", Serializer.STRING, Serializer.STRING).createOrOpen();
-		scheduletime = (ConcurrentMap<Integer, TaskSchedule>) db.hashMap("schedule").createOrOpen();
-		if(scheduletime.isEmpty()) {
+		schedulesettingtime = (ConcurrentMap<Integer, TaskSchedule>) db.hashMap("schedule").createOrOpen();
+		if(schedulesettingtime.isEmpty()) {
 			try {
-			scheduletime.put(1, new TaskSchedule());}
+			schedulesettingtime.put(1, new TaskSchedule());}
 			catch (Exception e ) {
 				e.printStackTrace();
 			}
 			db.commit();
 			}
+		scheduleExecution = db.hashMap("scheduleExecution", Serializer.INTEGER, Serializer.LONG).createOrOpen();
+		
 		
 		}
 	
@@ -50,6 +56,35 @@ public class Persistence {
 	 private static String emailsave=emailMap.get("mail");
 	
 
+	 
+	 public static void saveNewScheduleExecution(Long time) {
+		 
+		 scheduleExecution.put(scheduleExecution.size()+1,time);
+		 db.commit();
+		 
+	 }
+	 
+	 
+	 public static Long getLastScheduleExecution() {
+		 
+
+		 
+		 try {
+		return scheduleExecution.get(scheduleExecution.size());}
+		 catch (Exception e) {
+			 
+			 return 0l;
+		 }
+		 
+	 }
+	 
+	 
+	 
+	 public static ConcurrentMap<Integer,Long>  getAllScheduleExecution(){
+		 return scheduleExecution;
+	 }
+	 
+	 
 	
 	public static String getEmail(){
 		return emailsave;
@@ -57,23 +92,23 @@ public class Persistence {
 
 	public static TaskSchedule getTask() {
 		
-		return scheduletime.get(1);
+		return schedulesettingtime.get(1);
 		
 	}
 	
 	public static void setTask(TaskSchedule schedule) {
-		scheduletime.put(1, schedule);
+		schedulesettingtime.put(1, schedule);
 		db.commit();
 		
 		
 	}
 	public static long getPeriodTask() {
 		
-		return scheduletime.get(1).getPeriodo().getvalue();
+		return schedulesettingtime.get(1).getPeriodo().getvalue();
 	}
 
 	public static Calendar getCalendarTask() {
-		return scheduletime.get(1).getOra();
+		return schedulesettingtime.get(1).getOra();
 		
 	}
 	

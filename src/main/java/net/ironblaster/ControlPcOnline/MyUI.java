@@ -2,6 +2,10 @@ package net.ironblaster.ControlPcOnline;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -17,6 +21,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.UI;
@@ -105,6 +110,12 @@ public class MyUI extends UI {
 			}
         });
         
+        
+        
+       
+        
+        
+        
         HorizontalLayout bottoni = new HorizontalLayout();
         bottoni.addComponents(aggiungiPc,rimuovi,eseguiPing,carica);
         
@@ -137,8 +148,26 @@ public class MyUI extends UI {
        
         
         
+        Button showschedules = new Button("all schedule");
+        showschedules.addClickListener(e->{
+        	
+        	//TODO CUSTOM COMPONENT WINDOW WITH GRID
+        });
         
-        layout.addComponents(bottoni,computer);
+        
+        
+        
+        Label lastexecution = new Label("ultima esecuzione: "+Util.longToFormattedDate(Persistence.getLastScheduleExecution()));
+        
+        
+        
+        
+        
+        
+        HorizontalLayout schedule = new HorizontalLayout();
+        schedule.addComponents(showschedules,lastexecution);
+        
+        layout.addComponents(bottoni,schedule,computer);
         layout.setComponentAlignment(computer, Alignment.MIDDLE_CENTER);
         
         setContent(layout);
