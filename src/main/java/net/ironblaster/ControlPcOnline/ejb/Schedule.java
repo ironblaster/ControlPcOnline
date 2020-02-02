@@ -11,7 +11,7 @@ import net.ironblaster.ControlPcOnline.persistence.pojo.Persistence;
 
 public class Schedule {
 	
-
+	public static Timer timer = new Timer();
 	public static void esegui() {
 		
 		
@@ -24,10 +24,17 @@ public class Schedule {
 
 	
 		// every night at 23pm you run your task
-		Timer timer = new Timer();
+
 		timer.scheduleAtFixedRate(exe(), Persistence.getCalendarTask().getTime(),Persistence.getPeriodTask());
 		
-
+		
+	
+	}
+	
+	public static void reloadSchedule() {
+		timer.purge();
+		timer.cancel();
+		esegui();
 		
 	}
 	

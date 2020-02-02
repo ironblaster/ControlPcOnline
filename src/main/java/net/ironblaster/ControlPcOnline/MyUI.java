@@ -23,6 +23,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 import net.ironblaster.ControlPcOnline.CustomComponentVaadin.WindowAddPc;
+import net.ironblaster.ControlPcOnline.ejb.Schedule;
 import net.ironblaster.ControlPcOnline.networkCommand.Ping;
 import net.ironblaster.ControlPcOnline.persistence.pojo.Persistence;
 import net.ironblaster.ControlPcOnline.sessionPojo.PcList;
@@ -93,10 +94,19 @@ public class MyUI extends UI {
         });
         
         
+        Button carica =  new Button("Carica in schedule");
         
+        carica.addClickListener(e->{
+        	try {
+        	Schedule.reloadSchedule();
+        	Notification.show("Complete Reload");
+        	}catch (Exception ex) {
+				Notification.show("error",ex.getMessage(),Type.ERROR_MESSAGE);
+			}
+        });
         
         HorizontalLayout bottoni = new HorizontalLayout();
-        bottoni.addComponents(aggiungiPc,rimuovi,eseguiPing);
+        bottoni.addComponents(aggiungiPc,rimuovi,eseguiPing,carica);
         
         
         
