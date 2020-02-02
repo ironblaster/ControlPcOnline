@@ -18,11 +18,30 @@ import net.ironblaster.ControlPcOnline.sessionPojo.PcList;
 @SuppressWarnings("unchecked")
 public class Persistence {
 	
+	public enum EMAILSETTING{
+		EMAIL,
+		PASSWORD,
+		SERVERSMTP,
+		PORT,
+		AUTH,
+		SSLENABLE,
+		RECIVEREMAIL
+		
+	}
+	
+
+	
+	
+	
 	 public static DB db;
-	 public static ConcurrentMap<String,String> emailMap;
+	// public static ConcurrentMap<String,String> emailMap;
 	 public static ConcurrentMap<String,String> listIp;
 	 public static ConcurrentMap<Integer,TaskSchedule> schedulesettingtime;
 	 public static ConcurrentMap<Integer,Long> scheduleExecution;
+	 public static ConcurrentMap<EMAILSETTING,String> emailSetting;
+	 
+	 
+	 
 	 
 	 
 	static {
@@ -34,7 +53,7 @@ public class Persistence {
 			
 			e.printStackTrace();
 		}
-		emailMap = db.hashMap("email", Serializer.STRING, Serializer.STRING).createOrOpen();
+		emailSetting = (ConcurrentMap<EMAILSETTING, String>) db.hashMap("email").createOrOpen();
 		listIp = db.hashMap("iplist", Serializer.STRING, Serializer.STRING).createOrOpen();
 		schedulesettingtime = (ConcurrentMap<Integer, TaskSchedule>) db.hashMap("schedule").createOrOpen();
 		if(schedulesettingtime.isEmpty()) {
@@ -51,9 +70,27 @@ public class Persistence {
 		}
 	
 	
-	 
-	 
-	 private static String emailsave=emailMap.get("mail");
+	
+	
+	public static void saveEmailSetting(String email,String password,String serversmtp,String port, Boolean auth, Boolean ssl,String mailReciver) {
+		
+		emailSetting.clear();
+		emailSetting.put(EMAILSETTING.EMAIL, email);
+		emailSetting.put(EMAILSETTING.PASSWORD, password);
+		emailSetting.put(EMAILSETTING.SERVERSMTP, serversmtp);
+		emailSetting.put(EMAILSETTING.PORT, port);
+		emailSetting.put(EMAILSETTING.AUTH, auth.toString());
+		emailSetting.put(EMAILSETTING.SSLENABLE, ssl.toString());
+		emailSetting.put(EMAILSETTING.RECIVEREMAIL, mailReciver);
+		db.commit();
+
+	}
+	
+	public static ConcurrentMap<EMAILSETTING, String> getEmailSetting() {
+		return emailSetting;}
+		
+	
+	
 	
 
 	 
@@ -85,11 +122,6 @@ public class Persistence {
 	 }
 	 
 	 
-	
-	public static String getEmail(){
-		return emailsave;
-	}
-
 	public static TaskSchedule getTask() {
 		
 		return schedulesettingtime.get(1);
@@ -112,15 +144,6 @@ public class Persistence {
 		
 	}
 	
-	
-
-	public static void setEmail(String email) {
-		
-		emailMap.put("mail",email);
-		db.commit();
-		emailsave=email;
-	
-	}
 
 
 
