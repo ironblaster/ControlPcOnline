@@ -8,6 +8,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
+import net.ironblaster.ControlPcOnline.notification.InviaEmail;
 import net.ironblaster.ControlPcOnline.persistence.Persistence;
 import net.ironblaster.ControlPcOnline.persistence.Persistence.EMAILSETTING;
 
@@ -70,6 +71,11 @@ public class WindowsetMailSetting extends Window {
 					mailReciver.getValue().trim());
 		});
 		
+		Button testemail = new Button("test email");
+		
+		testemail.addClickListener(e->{
+			InviaEmail.mail("oggetto test", "IL MESSAGGIO è STATO INVIATO");
+		});
 
 		
 		FormLayout form = new FormLayout();
@@ -80,7 +86,7 @@ public class WindowsetMailSetting extends Window {
 							port,
 							auth,
 							ssl,
-							mailReciver,save);
+							mailReciver,save,testemail);
 		
 		layout.addComponent(form);
 		layout.setComponentAlignment(form, Alignment.MIDDLE_CENTER);

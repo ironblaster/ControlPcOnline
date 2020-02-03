@@ -18,17 +18,17 @@ public class InviaEmail {
 		static Properties properties;
 	 static {
 	    	properties = new Properties();
-	        properties.put("mail.smtp.host", Persistence.getEmailSetting().get(EMAILSETTING.SERVERSMTP));
-	        properties.put("mail.smtp.port", Persistence.getEmailSetting().get(EMAILSETTING.PORT));
-	        properties.put("mail.smtp.auth", Persistence.getEmailSetting().get(EMAILSETTING.AUTH));
-	        properties.put("mail.smtp.starttls.enable", Persistence.getEmailSetting().get(EMAILSETTING.SSLENABLE));
+	        properties.put("mail.smtp.host", Persistence.getEmailSetting().get(EMAILSETTING.SERVERSMTP.getValue()));
+	        properties.put("mail.smtp.port", Persistence.getEmailSetting().get(EMAILSETTING.PORT.getValue()));
+	        properties.put("mail.smtp.auth", Persistence.getEmailSetting().get(EMAILSETTING.AUTH.getValue()));
+	        properties.put("mail.smtp.starttls.enable", Persistence.getEmailSetting().get(EMAILSETTING.SSLENABLE.getValue()));
 	    }
 	 public static void mail(String oggetto, String messaggio) {
 		    
 	        try {
 	            Authenticator auth = new Authenticator() {
 	                public PasswordAuthentication getPasswordAuthentication() {
-	                    return new PasswordAuthentication(Persistence.getEmailSetting().get(EMAILSETTING.EMAIL), Persistence.getEmailSetting().get(EMAILSETTING.PASSWORD));
+	                    return new PasswordAuthentication(Persistence.getEmailSetting().get(EMAILSETTING.EMAIL.getValue()), Persistence.getEmailSetting().get(EMAILSETTING.PASSWORD.getValue()));
 	                }
 	            };
 	            
@@ -39,10 +39,10 @@ public class InviaEmail {
 	            
 	            
 	            
-	            message.setFrom(new InternetAddress(Persistence.getEmailSetting().get(EMAILSETTING.EMAIL)));     
+	            message.setFrom(new InternetAddress(Persistence.getEmailSetting().get(EMAILSETTING.EMAIL.getValue())));     
 	           
 	            
-	            message.setRecipient(Message.RecipientType.TO, new InternetAddress(Persistence.getEmailSetting().get(EMAILSETTING.RECIVEREMAIL)));
+	            message.setRecipient(Message.RecipientType.TO, new InternetAddress(Persistence.getEmailSetting().get(EMAILSETTING.RECIVEREMAIL.getValue())));
 	            message.setSentDate(new Date());
 	            message.setSubject(oggetto);
 	            message.setText(messaggio);

@@ -116,6 +116,9 @@ public class MyUI extends UI {
         });
         
         
+       
+        
+        
         HorizontalLayout bottoni = new HorizontalLayout();
         bottoni.addComponents(aggiungiPc,rimuovi,eseguiPing,carica,NotifiSetting);
         

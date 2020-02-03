@@ -4,7 +4,11 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import net.ironblaster.ControlPcOnline.Util;
+import net.ironblaster.ControlPcOnline.networkCommand.Ping;
+import net.ironblaster.ControlPcOnline.notification.InviaEmail;
 import net.ironblaster.ControlPcOnline.persistence.Persistence;
+import net.ironblaster.ControlPcOnline.sessionPojo.PcList;
 
 public class Schedule {
 	
@@ -45,13 +49,19 @@ public class Schedule {
 			//System.out.println("esecuzione task alle: "+new Date().getSeconds());
 		
 			//TODO CREARE SISTEMA DI INVIO EMAIL CON I RISULTATI DEI PC 
+			StringBuilder messaggio = new StringBuilder();
 			
 			
+			for (PcList pc :Persistence.getListPc()) {
+				if(Ping.isReachable(pc.getIp())) {
+					messaggio.append("pc: "+pc.getName()+"\n\r ip: "+pc.getIp()+"\n\r STATO: ACCESO \n\r"+Util.longToFormattedDate(new Date().getTime())+"\n\r");}
+					else {
+						messaggio.append("pc: "+pc.getName()+"\n\r ip: "+pc.getIp()+"\n\r STATO: SPENTO \n\r"+Util.longToFormattedDate(new Date().getTime())+"\n\r");}
+				
+			}
 			
 			
-			
-			
-			
+			InviaEmail.mail("riepilogo pc ping", messaggio.toString());
 			
 			
 			
