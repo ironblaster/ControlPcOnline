@@ -122,9 +122,9 @@ public class Persistence {
 	 
 	 
 	 
-	 public static ConcurrentMap<Integer,Long>  getAllScheduleExecution(){
+/*	 public static ConcurrentMap<Integer,Long>  getAllScheduleExecution(){
 		 return scheduleExecution;
-	 }
+	 }*/
 	 
 	 
 	public static TaskSchedule getTask() {

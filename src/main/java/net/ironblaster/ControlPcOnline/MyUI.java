@@ -148,24 +148,25 @@ public class MyUI extends UI {
        
         
         
-        Button showschedules = new Button("all schedule");
-        showschedules.addClickListener(e->{
-        	
-        	//TODO CUSTOM COMPONENT WINDOW WITH GRID
-        });
+
         
         
         
         
-        Label lastexecution = new Label("ultima esecuzione: "+Util.longToFormattedDate(Persistence.getLastScheduleExecution()));
+        Label lastexecution = new Label();
+        lastexecution.setCaptionAsHtml(true);
+        lastexecution.setCaption("<b>ultima esecuzione:</b> "+Util.longToFormattedDate(Persistence.getLastScheduleExecution()));
         
         
+        Label nextExe = new Label();
+        nextExe.setCaptionAsHtml(true);
+        nextExe.setCaption("<b>prossima esecuzione: </b>"+Util.longToFormattedDate(Persistence.getTask().getOra().getTimeInMillis()));
         
         
         
         
         HorizontalLayout schedule = new HorizontalLayout();
-        schedule.addComponents(showschedules,lastexecution);
+        schedule.addComponents(lastexecution,nextExe);
         
         layout.addComponents(bottoni,schedule,computer);
         layout.setComponentAlignment(computer, Alignment.MIDDLE_CENTER);
