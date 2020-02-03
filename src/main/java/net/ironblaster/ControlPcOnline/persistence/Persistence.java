@@ -1,18 +1,14 @@
-package net.ironblaster.ControlPcOnline.persistence.pojo;
+ package net.ironblaster.ControlPcOnline.persistence;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
-import org.junit.Test;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
 
-import net.ironblaster.ControlPcOnline.ejb.Schedule;
 import net.ironblaster.ControlPcOnline.sessionPojo.PcList;
 
 @SuppressWarnings("unchecked")

@@ -1,12 +1,5 @@
 package net.ironblaster.ControlPcOnline;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Timer;
-
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
@@ -30,7 +23,7 @@ import com.vaadin.ui.VerticalLayout;
 import net.ironblaster.ControlPcOnline.CustomComponentVaadin.WindowAddPc;
 import net.ironblaster.ControlPcOnline.ejb.Schedule;
 import net.ironblaster.ControlPcOnline.networkCommand.Ping;
-import net.ironblaster.ControlPcOnline.persistence.pojo.Persistence;
+import net.ironblaster.ControlPcOnline.persistence.Persistence;
 import net.ironblaster.ControlPcOnline.sessionPojo.PcList;
 
 /**
@@ -42,6 +35,10 @@ import net.ironblaster.ControlPcOnline.sessionPojo.PcList;
  */
 @Theme("mytheme")
 public class MyUI extends UI {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Grid<PcList> computer = new Grid<>();
 	
     @Override
@@ -211,5 +208,10 @@ public class MyUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
     }
 }

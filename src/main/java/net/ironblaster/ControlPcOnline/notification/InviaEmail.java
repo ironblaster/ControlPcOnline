@@ -11,8 +11,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import net.ironblaster.ControlPcOnline.persistence.pojo.Persistence;
-import net.ironblaster.ControlPcOnline.persistence.pojo.Persistence.EMAILSETTING;
+import net.ironblaster.ControlPcOnline.persistence.Persistence;
+import net.ironblaster.ControlPcOnline.persistence.Persistence.EMAILSETTING;
 
 public class InviaEmail {
 		static Properties properties;

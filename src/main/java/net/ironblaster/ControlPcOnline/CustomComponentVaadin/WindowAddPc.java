@@ -8,7 +8,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
 
-import net.ironblaster.ControlPcOnline.persistence.pojo.Persistence;
+import net.ironblaster.ControlPcOnline.persistence.Persistence;
 
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -16,6 +16,14 @@ import com.vaadin.ui.Window;
 
 public class WindowAddPc extends Window{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
+
+
 	public WindowAddPc() {
 		
 		this.center();

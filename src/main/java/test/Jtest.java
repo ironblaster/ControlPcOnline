@@ -3,7 +3,7 @@ package test;
 import org.junit.Test;
 
 import net.ironblaster.ControlPcOnline.networkCommand.Ping;
-import net.ironblaster.ControlPcOnline.persistence.pojo.Persistence;
+import net.ironblaster.ControlPcOnline.persistence.Persistence;
 import net.ironblaster.ControlPcOnline.sessionPojo.PcList;
 
 public class Jtest {

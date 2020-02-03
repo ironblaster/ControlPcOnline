@@ -3,11 +3,8 @@ package net.ironblaster.ControlPcOnline.ejb;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
-import org.junit.Test;
-
-import net.ironblaster.ControlPcOnline.persistence.pojo.Persistence;
+import net.ironblaster.ControlPcOnline.persistence.Persistence;
 
 public class Schedule {
 	
@@ -45,7 +42,7 @@ public class Schedule {
 
 		@Override
 		public void run() {
-			System.out.println("esecuzione task alle: "+new Date().getSeconds());
+			//System.out.println("esecuzione task alle: "+new Date().getSeconds());
 		
 			//TODO CREARE SISTEMA DI INVIO EMAIL CON I RISULTATI DEI PC 
 			

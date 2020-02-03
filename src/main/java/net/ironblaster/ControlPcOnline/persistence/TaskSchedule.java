@@ -1,4 +1,4 @@
-package net.ironblaster.ControlPcOnline.persistence.pojo;
+package net.ironblaster.ControlPcOnline.persistence;
 
 import java.io.Serializable;
 import java.util.Calendar;

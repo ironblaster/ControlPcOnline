@@ -55,7 +55,7 @@
 	<dependency>
    <groupId>com.vaadin</groupId>
    <artifactId>vaadin-context-menu</artifactId>
-   <version>3.0.2</version>
+   <version>3.0.2</version><!--$NO-MVN-MAN-VER$-->
 </dependency>
 		
 		<dependency>
