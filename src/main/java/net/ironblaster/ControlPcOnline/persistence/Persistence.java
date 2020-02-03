@@ -15,14 +15,22 @@ import net.ironblaster.ControlPcOnline.sessionPojo.PcList;
 public class Persistence {
 	
 	public enum EMAILSETTING{
-		EMAIL,
-		PASSWORD,
-		SERVERSMTP,
-		PORT,
-		AUTH,
-		SSLENABLE,
-		RECIVEREMAIL
+		EMAIL("email"),
+		PASSWORD("password"),
+		SERVERSMTP("smtp"),
+		PORT("port"),
+		AUTH("auth"),
+		SSLENABLE("ssl"),
+		RECIVEREMAIL("reciver");
 		
+		private String value;
+		private EMAILSETTING (String value) {
+			this.value=value;
+		}
+		public String getValue () {
+			return value;
+		}
+
 	}
 	
 
@@ -34,7 +42,7 @@ public class Persistence {
 	 public static ConcurrentMap<String,String> listIp;
 	 public static ConcurrentMap<Integer,TaskSchedule> schedulesettingtime;
 	 public static ConcurrentMap<Integer,Long> scheduleExecution;
-	 public static ConcurrentMap<EMAILSETTING,String> emailSetting;
+	 public static ConcurrentMap<String,String> emailSetting;
 	 
 	 
 	 
@@ -42,14 +50,14 @@ public class Persistence {
 	 
 	static {
 		try {
-		db=DBMaker.fileDB("testdbpredest.irondb").make();
+		db=DBMaker.fileDB("newteststringstring.irondb").make();
 		
 		}
 		catch (Exception e) {
 			
 			e.printStackTrace();
 		}
-		emailSetting = (ConcurrentMap<EMAILSETTING, String>) db.hashMap("email").createOrOpen();
+		emailSetting = db.hashMap("email",Serializer.STRING,Serializer.STRING).createOrOpen();
 		listIp = db.hashMap("iplist", Serializer.STRING, Serializer.STRING).createOrOpen();
 		schedulesettingtime = (ConcurrentMap<Integer, TaskSchedule>) db.hashMap("schedule").createOrOpen();
 		if(schedulesettingtime.isEmpty()) {
@@ -71,18 +79,19 @@ public class Persistence {
 	public static void saveEmailSetting(String email,String password,String serversmtp,String port, Boolean auth, Boolean ssl,String mailReciver) {
 		
 		emailSetting.clear();
-		emailSetting.put(EMAILSETTING.EMAIL, email);
-		emailSetting.put(EMAILSETTING.PASSWORD, password);
-		emailSetting.put(EMAILSETTING.SERVERSMTP, serversmtp);
-		emailSetting.put(EMAILSETTING.PORT, port);
-		emailSetting.put(EMAILSETTING.AUTH, auth.toString());
-		emailSetting.put(EMAILSETTING.SSLENABLE, ssl.toString());
-		emailSetting.put(EMAILSETTING.RECIVEREMAIL, mailReciver);
+		db.commit();
+		emailSetting.put(EMAILSETTING.EMAIL.getValue(), email);
+		emailSetting.put(EMAILSETTING.PASSWORD.getValue(), password);
+		emailSetting.put(EMAILSETTING.SERVERSMTP.getValue(), serversmtp);
+		emailSetting.put(EMAILSETTING.PORT.getValue(), port);
+		emailSetting.put(EMAILSETTING.AUTH.getValue(), auth.toString());
+		emailSetting.put(EMAILSETTING.SSLENABLE.getValue(), ssl.toString());
+		emailSetting.put(EMAILSETTING.RECIVEREMAIL.getValue(), mailReciver);
 		db.commit();
 
 	}
 	
-	public static ConcurrentMap<EMAILSETTING, String> getEmailSetting() {
+	public static ConcurrentMap<String, String> getEmailSetting() {
 		return emailSetting;}
 		
 	

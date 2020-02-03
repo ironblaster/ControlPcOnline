@@ -1,7 +1,5 @@
 package net.ironblaster.ControlPcOnline.CustomComponentVaadin;
 
-import java.text.Normalizer.Form;
-
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
@@ -45,13 +43,13 @@ public class WindowsetMailSetting extends Window {
 		
 		
 		try {
-			email.setValue(Persistence.getEmailSetting().get(EMAILSETTING.EMAIL));
-			password.setValue(Persistence.getEmailSetting().get(EMAILSETTING.PASSWORD));
-			serversmtp.setValue(Persistence.getEmailSetting().get(EMAILSETTING.SERVERSMTP));
-			port.setValue(Persistence.getEmailSetting().get(EMAILSETTING.PORT));
-			auth.setValue(Boolean.parseBoolean(Persistence.getEmailSetting().get(EMAILSETTING.AUTH)));
-			ssl.setValue(Boolean.parseBoolean(Persistence.getEmailSetting().get(EMAILSETTING.SSLENABLE)));
-			mailReciver.setValue(Persistence.getEmailSetting().get(EMAILSETTING.RECIVEREMAIL));
+			email.setValue(Persistence.getEmailSetting().get(EMAILSETTING.EMAIL.getValue()));
+			password.setValue(Persistence.getEmailSetting().get(EMAILSETTING.PASSWORD.getValue()));
+			serversmtp.setValue(Persistence.getEmailSetting().get(EMAILSETTING.SERVERSMTP.getValue()));
+			port.setValue(Persistence.getEmailSetting().get(EMAILSETTING.PORT.getValue()));
+			auth.setValue(Boolean.parseBoolean(Persistence.getEmailSetting().get(EMAILSETTING.AUTH.getValue())));
+			ssl.setValue(Boolean.parseBoolean(Persistence.getEmailSetting().get(EMAILSETTING.SSLENABLE.getValue())));
+			mailReciver.setValue(Persistence.getEmailSetting().get(EMAILSETTING.RECIVEREMAIL.getValue()));
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
