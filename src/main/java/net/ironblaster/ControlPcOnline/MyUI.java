@@ -21,6 +21,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 import net.ironblaster.ControlPcOnline.CustomComponentVaadin.WindowAddPc;
+import net.ironblaster.ControlPcOnline.CustomComponentVaadin.WindowsetMailSetting;
 import net.ironblaster.ControlPcOnline.ejb.Schedule;
 import net.ironblaster.ControlPcOnline.networkCommand.Ping;
 import net.ironblaster.ControlPcOnline.persistence.Persistence;
@@ -109,12 +110,14 @@ public class MyUI extends UI {
         
         
         
-       
-        
+       Button NotifiSetting = new Button("Impostazioni email");
+        NotifiSetting.addClickListener(e->{
+        	addWindow(new WindowsetMailSetting());
+        });
         
         
         HorizontalLayout bottoni = new HorizontalLayout();
-        bottoni.addComponents(aggiungiPc,rimuovi,eseguiPing,carica);
+        bottoni.addComponents(aggiungiPc,rimuovi,eseguiPing,carica,NotifiSetting);
         
         
         
