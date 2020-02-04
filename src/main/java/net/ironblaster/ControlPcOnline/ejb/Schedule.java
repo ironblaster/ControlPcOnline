@@ -25,8 +25,8 @@ public class Schedule {
 
 	
 		// every night at 23pm you run your task
-
-		timer.scheduleAtFixedRate(exe(), Persistence.getCalendarTask().getTime(),Persistence.getPeriodTask());
+		
+		timer.schedule(exe(), Persistence.getCalendarTask().getTime());
 		
 		
 	
@@ -47,8 +47,6 @@ public class Schedule {
 		@Override
 		public void run() {
 			//System.out.println("esecuzione task alle: "+new Date().getSeconds());
-		
-			//TODO CREARE SISTEMA DI INVIO EMAIL CON I RISULTATI DEI PC 
 			StringBuilder messaggio = new StringBuilder();
 			
 			

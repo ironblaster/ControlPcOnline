@@ -50,7 +50,7 @@ public class Persistence {
 	 
 	static {
 		try {
-		db=DBMaker.fileDB("newteststringstring.irondb").make();
+		db=DBMaker.fileDB("databaseTime.ironblaster").make();
 		
 		}
 		catch (Exception e) {

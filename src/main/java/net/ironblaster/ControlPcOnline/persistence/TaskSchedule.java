@@ -46,7 +46,7 @@ public class TaskSchedule implements Serializable{
 		this.periodo=periodo;
 		this.ora=Calendar.getInstance();
 		this.ora.set(Calendar.HOUR_OF_DAY, 23);
-		this.ora.set(Calendar.MINUTE, 0);
+		this.ora.set(Calendar.MINUTE, 00);
 		this.ora.set(Calendar.SECOND, 0);
 	
 	}
@@ -61,7 +61,7 @@ public class TaskSchedule implements Serializable{
 		this.periodo=periodicita.DAILY;
 		ora=Calendar.getInstance();
 		ora.set(Calendar.HOUR_OF_DAY, 23);
-		ora.set(Calendar.MINUTE, 0);
+		ora.set(Calendar.MINUTE, 00);
 		ora.set(Calendar.SECOND, 0);
 	
 	}

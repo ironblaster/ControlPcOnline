@@ -16,12 +16,15 @@ import net.ironblaster.ControlPcOnline.persistence.Persistence.EMAILSETTING;
 
 public class InviaEmail {
 		static Properties properties;
-	 static {
+	 static {try {
 	    	properties = new Properties();
 	        properties.put("mail.smtp.host", Persistence.getEmailSetting().get(EMAILSETTING.SERVERSMTP.getValue()));
 	        properties.put("mail.smtp.port", Persistence.getEmailSetting().get(EMAILSETTING.PORT.getValue()));
 	        properties.put("mail.smtp.auth", Persistence.getEmailSetting().get(EMAILSETTING.AUTH.getValue()));
-	        properties.put("mail.smtp.starttls.enable", Persistence.getEmailSetting().get(EMAILSETTING.SSLENABLE.getValue()));
+	        properties.put("mail.smtp.starttls.enable", Persistence.getEmailSetting().get(EMAILSETTING.SSLENABLE.getValue()));}
+	 	catch (Exception e) {
+	 		e.printStackTrace();
+	 	}
 	    }
 	 public static void mail(String oggetto, String messaggio) {
 		    
