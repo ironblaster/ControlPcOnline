@@ -47,7 +47,10 @@ public class InviaEmail {
 	            
 	            message.setRecipient(Message.RecipientType.TO, new InternetAddress(Persistence.getEmailSetting().get(EMAILSETTING.RECIVEREMAIL.getValue())));
 	            message.setSentDate(new Date());
-	            message.setSubject(oggetto);
+	            
+	            String ragionesociale="";
+	            try{ragionesociale=Persistence.getSettingRagioneSociale();}catch(Exception e) {}
+	            message.setSubject("ControlPcOnline - "+ragionesociale+" : "+oggetto);
 	            message.setText(messaggio);
 
 	            Transport.send(message);

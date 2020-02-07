@@ -16,6 +16,7 @@ import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.TextField;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -166,10 +167,17 @@ public class MyUI extends UI {
         nextExe.setCaption("<b>prossima esecuzione: </b>"+Util.longToFormattedDate(Persistence.getTask().getOra().getTimeInMillis()));
         
         
+        TextField ragionesociale = new TextField();
+        ragionesociale.setPlaceholder("Ragione sociale");
+        try {ragionesociale.setValue(Persistence.getSettingRagioneSociale());}catch(Exception e) {}
+        
+        
+        ragionesociale.addBlurListener(e->{Persistence.saveStaticSetting("ragionesociale", ragionesociale.getValue().trim());});
+        
         
         
         HorizontalLayout schedule = new HorizontalLayout();
-        schedule.addComponents(lastexecution,nextExe);
+        schedule.addComponents(lastexecution,nextExe,ragionesociale);
         
         layout.addComponents(bottoni,schedule,computer);
         layout.setComponentAlignment(computer, Alignment.MIDDLE_CENTER);

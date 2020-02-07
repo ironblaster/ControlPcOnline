@@ -43,7 +43,7 @@ public class Persistence {
 	 public static ConcurrentMap<Integer,TaskSchedule> schedulesettingtime;
 	 public static ConcurrentMap<Integer,Long> scheduleExecution;
 	 public static ConcurrentMap<String,String> emailSetting;
-	 
+	 public static ConcurrentMap<String,String> StaticSetting;
 	 
 	 
 	 
@@ -60,16 +60,15 @@ public class Persistence {
 		emailSetting = db.hashMap("email",Serializer.STRING,Serializer.STRING).createOrOpen();
 		listIp = db.hashMap("iplist", Serializer.STRING, Serializer.STRING).createOrOpen();
 		schedulesettingtime = (ConcurrentMap<Integer, TaskSchedule>) db.hashMap("schedule").createOrOpen();
-		if(schedulesettingtime.isEmpty()) {
 			try {
 			schedulesettingtime.put(1, new TaskSchedule());}
 			catch (Exception e ) {
 				e.printStackTrace();
 			}
 			db.commit();
-			}
+			
 		scheduleExecution = db.hashMap("scheduleExecution", Serializer.INTEGER, Serializer.LONG).createOrOpen();
-		
+		StaticSetting = db.hashMap("StaticSetting",Serializer.STRING,Serializer.STRING).createOrOpen();
 		
 		}
 	
@@ -91,6 +90,12 @@ public class Persistence {
 
 	}
 	
+	
+	
+	
+	
+	
+	
 	public static ConcurrentMap<String, String> getEmailSetting() {
 		return emailSetting;}
 		
@@ -105,6 +110,21 @@ public class Persistence {
 		 db.commit();
 		 
 	 }
+	
+	 public static void saveStaticSetting(String name,String value) {
+		 
+		 StaticSetting.put(name,value);
+		 db.commit();
+		 
+	 }
+	 
+	 public static String getSettingRagioneSociale () {
+		 
+		 return StaticSetting.get("ragionesociale");
+		 
+		 
+	 } 
+	 
 	 
 	 
 	 public static Long getLastScheduleExecution() {
@@ -120,11 +140,6 @@ public class Persistence {
 		 
 	 }
 	 
-	 
-	 
-/*	 public static ConcurrentMap<Integer,Long>  getAllScheduleExecution(){
-		 return scheduleExecution;
-	 }*/
 	 
 	 
 	public static TaskSchedule getTask() {

@@ -26,7 +26,7 @@ public class Schedule {
 	
 		// every night at 23pm you run your task
 		
-		timer.schedule(exe(), Persistence.getCalendarTask().getTime());
+		timer.schedule(exe(), Persistence.getCalendarTask().getTime(),Persistence.getPeriodTask());
 		
 		
 	
