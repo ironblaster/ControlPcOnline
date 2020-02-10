@@ -148,15 +148,6 @@ public class MyUI extends UI {
         });      
         
         
-        
-       
-        
-        
-
-        
-        
-        
-        
         Label lastexecution = new Label();
         lastexecution.setCaptionAsHtml(true);
         lastexecution.setCaption("<b>ultima esecuzione:</b> "+Util.longToFormattedDate(Persistence.getLastScheduleExecution()));
@@ -182,17 +173,13 @@ public class MyUI extends UI {
         layout.addComponents(bottoni,schedule,computer);
         layout.setComponentAlignment(computer, Alignment.MIDDLE_CENTER);
         
-        setContent(layout);
-        
-        
-        
+        setContent(layout);   
         
     }
     
     
     
     private void updateGridBodyMenu(GridContextMenuOpenEvent<PcList> event) {
-        //event.getContextMenu().removeItems();
         if (event.getItem() != null) {
             event.getContextMenu().addItem("Rimuovi", VaadinIcons.CLOSE, selectedItem -> {
             	//TODO AGGIUNGERE PULSANTI SIA DI TEST PING CHE DI RIMOZIONE DA PERSISTENZA

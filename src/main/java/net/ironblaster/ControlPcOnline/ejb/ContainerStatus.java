@@ -28,10 +28,10 @@ public class ContainerStatus {
 		}
 	}
 	
-	@PreDestroy
-	private void preDestroy() {
+//	@PreDestroy
+/*	private void preDestroy() {
 		Persistence.db.close();
-	}
+	}*/
 	
 	
 }

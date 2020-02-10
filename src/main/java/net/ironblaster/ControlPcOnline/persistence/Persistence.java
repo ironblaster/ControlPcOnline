@@ -3,11 +3,16 @@
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.mapdb.BTreeMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
+import org.mapdb.Store;
 
 import net.ironblaster.ControlPcOnline.sessionPojo.PcList;
 
@@ -49,8 +54,14 @@ public class Persistence {
 	 
 	 
 	static {
+		//************test custom component************************
+		
+	//	Map <String, TaskSchedule> testmap = db.hashMap("test",Serializer.STRING,Serializer.JAVA).createOrOpen(); 
+		
+		
+		//*********************************************************
 		try {
-		db=DBMaker.fileDB("databaseTime.ironblaster").make();
+		db=DBMaker.fileDB("databaseTime.ironblaster").closeOnJvmShutdown().make(); //closeonJvmShutdown user for remove predestroy method
 		
 		}
 		catch (Exception e) {
@@ -59,7 +70,7 @@ public class Persistence {
 		}
 		emailSetting = db.hashMap("email",Serializer.STRING,Serializer.STRING).createOrOpen();
 		listIp = db.hashMap("iplist", Serializer.STRING, Serializer.STRING).createOrOpen();
-		schedulesettingtime = (ConcurrentMap<Integer, TaskSchedule>) db.hashMap("schedule").createOrOpen();
+		schedulesettingtime = db.hashMap("schedule",Serializer.INTEGER,Serializer.JAVA).createOrOpen();
 			try {
 			schedulesettingtime.put(1, new TaskSchedule());}
 			catch (Exception e ) {
